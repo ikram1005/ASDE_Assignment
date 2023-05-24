@@ -1,0 +1,59 @@
+Task-3 (debugging)
+
+Given below is a Bash / Python script that performs following computation on an integer input (n):
+If n is less than 10: Calculate its Square
+Example: 4 => 16
+If n is between 10 and 20: Calculate the factorial of (n-10)
+Example: 15 => 120
+If n is greater than 20: Calculate the sum of all integers between 1 and (n-20)
+Example: 25 => 15
+
+The task is to identify the bugs in the script, fix them and share the new script. Only one of the two scripts required Bash or Python. Hint: You can correct the script by only changing 3-4 characters.
+
+//given code
+def compute(n):
+    if n < 10:
+        out = n ** 2
+    elif n < 20:
+        out = 1
+        for i in range(1, n-10):
+            out *= i
+    else:
+        lim = n - 20
+        out = lim * lim
+        out = out - lim
+        out = out / 2 
+    print(out)
+
+
+n = int(input("Enter an integer: "))
+compute(n)
+
+
+
+//Corrected code
+def compute(n):
+    if n < 10:
+        out = n ** 2
+    elif n < 20:
+        out = 1
+        for i in range(1, n-9):  
+            out *= i
+    else:
+        lim = n - 20
+        out = (lim * (lim + 1)) // 2  
+    print(out)
+
+
+n = int(input("Enter an integer: "))
+compute(n)
+
+
+//problems in given code as shown below:-
+
+//1.In the factorial calculation block, the range should be changed from (n-10) to (n-9) because if n is 15, then (n - 9) is 6. The loop will iterate from 1 to 5 or if you not change then (n-10) is 5. the Loop will iterate from  to 4.
+ 
+//2.In the sum calculation block, the formula has been corrected to calculate the sum of integers from 1 to (n-20).
+//3.The // operator is used instead of / to perform integer division when calculating the sum.
+
+
